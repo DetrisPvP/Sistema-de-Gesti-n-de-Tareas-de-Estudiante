@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestor de Tareas Académicas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Gestor de Tareas</h1>
+    <p class="subtitle">Organiza, filtra y edita tus tareas académicas</p>
+  </header>
+
+  <main class="container">
+    <!-- Panel -->
+    <section class="panel">
+      <h2>Nueva tarea</h2>
+      <form id="task-form">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="dueDate">Fecha de entrega</label>
+            <input type="date" id="dueDate" name="dueDate" required />
+          </div>
+          <div class="form-field">
+            <label for="subject">Materia</label>
+            <input type="text" id="subject" name="subject" placeholder="Ej: Matemáticas" required />
+          </div>
+          <div class="form-field">
+            <label for="priority">Prioridad</label>
+            <select id="priority" name="priority" required>
+              <option value="Baja">Baja</option>
+              <option value="Media">Media</option>
+              <option value="Alta">Alta</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" placeholder="Ej: Ejercicios de integrales" required />
+          </div>
+          <div class="form-field form-field--full">
+            <label for="description">Descripción</label>
+            <textarea id="description" name="description" rows="3" placeholder="Detalles de la tarea..." required></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <input type="hidden" id="taskId" />
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="reset" class="btn btn-secondary" id="resetFormBtn">Limpiar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Controles  -->
+    <section class="controls">
+      <div class="controls-group">
+        <div class="control">
+          <label for="sortBy">Ordenar por</label>
+          <select id="sortBy">
+            <option value="dueDateAsc">Fecha (ascendente)</option>
+            <option value="dueDateDesc">Fecha (descendente)</option>
+            <option value="priorityDesc">Prioridad (Alta→Baja)</option>
+            <option value="priorityAsc">Prioridad (Baja→Alta)</option>
+            <option value="titleAsc">Título (A→Z)</option>
+          </select>
+        </div>
+        <div class="control">
+          <label for="filterSubject">Filtrar materia</label>
+          <input type="text" id="filterSubject" placeholder="Ej: Matemáticas" />
+        </div>
+        <div class="control">
+          <label for="filterPriority">Filtrar prioridad</label>
+          <select id="filterPriority">
+            <option value="">Todas</option>
+            <option value="Baja">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+        <div class="control">
+          <label for="filterStatus">Filtrar estado</label>
+          <select id="filterStatus">
+            <option value="">Todos</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Retrasada">Retrasada</option>
+            <option value="Entregada">Entregada</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid  -->
+    <section class="cards-grid" id="cardsGrid">
+      
+    </section>
+  </main>
+
+  <!-- Modal  -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header class="modal-header">
+        <h3 id="modalTitle">Detalle de tarea</h3>
+        <button class="icon-btn" id="closeModalBtn" aria-label="Cerrar">✕</button>
+      </header>
+      <div class="modal-content">
+        <div class="modal-row">
+          <div><strong>Fecha:</strong> <span id="modalDueDate"></span></div>
+          <div><strong>Materia:</strong> <span id="modalSubject"></span></div>
+        </div>
+        <div class="modal-row">
+          <div><strong>Prioridad:</strong> <span id="modalPriority"></span></div>
+          <div><strong>Estado:</strong> <span id="modalStatus" class="chip"></span></div>
+        </div>
+        <div class="modal-block">
+          <div><strong>Título:</strong></div>
+          <div id="modalTitleText"></div>
+        </div>
+        <div class="modal-block">
+          <div><strong>Descripción:</strong></div>
+          <div id="modalDescription"></div>
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <button class="btn btn-secondary" id="modalMarkCompletedBtn">Marcar completada</button>
+        <button class="btn btn-primary" id="modalEditBtn">Editar</button>
+        <button class="btn btn-danger" id="modalDeleteBtn">Eliminar</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
